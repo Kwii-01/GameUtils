@@ -9,6 +9,11 @@ namespace Events {
     public static class EventManager {
         private static readonly Dictionary<Type, Delegate> m_events = new Dictionary<Type, Delegate>();
 
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        private static void OnLoad() {
+            m_events?.Clear();
+        }
+
         public static void AddListener<T>(Action<T> listener) {
             Type type = typeof(T);
             if (m_events.ContainsKey(type)) {

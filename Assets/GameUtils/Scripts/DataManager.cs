@@ -3,18 +3,18 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+using SavingSystem;
 namespace GameUtils {
-    [DefaultExecutionOrder(-10)]
-    public class DataManager : MonoBehaviour {
+    public class DataManager : ADatamanager {
         private static readonly string LEVEL = "LEVEL_INDEX";
 
 
         public int GetLevel() {
-            return PlayerPrefs.GetInt(LEVEL, 0);
+            return this.saver.LoadInt(LEVEL, 0);
         }
 
         public void SetLevel(int level) {
-            PlayerPrefs.SetInt(LEVEL, level);
+            this.saver.SaveInt(LEVEL, level);
         }
 
     }
